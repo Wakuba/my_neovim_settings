@@ -1,9 +1,9 @@
 # my_neovim_settings
 
-##Requires
+## Requires
 - node.js because of coc.vim
 
-##Procedures
+## Procedures
 1. if you don't setup node, you should setup node.
 '''
 curl -L git.io/nodebrew | perl - setup
