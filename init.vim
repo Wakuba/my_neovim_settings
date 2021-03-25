@@ -2,6 +2,13 @@ if &compatible
   set nocompatible " Be iMproved
 endif
 
+let s:dein_dir = $HOME . '/.config/nvim/dein'
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+if !isdirectory(s:dein_repo_dir)
+  call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
+endif
+
+
 " Required:
 " Add the dein installation directory into runtimepath
 set runtimepath+=$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim
@@ -29,10 +36,9 @@ call dein#end()
 filetype plugin indent on
 syntax enable
 
-" If you want to install not installed plugins on startup.
-"if dein#check_install()
-" call dein#install()
-"endi
+if dein#check_install()
+ call dein#install()
+endi
 
 set tabstop=2  
 set shiftwidth=2    
