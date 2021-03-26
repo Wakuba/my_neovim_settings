@@ -1,4 +1,4 @@
-name: CI
+name: coc.nvim CI
 
 on:
   push:
@@ -10,41 +10,47 @@ on:
 
 jobs:
   test:
-    name: Test
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
     strategy:
+      fail-fast: false
       matrix:
-        vim_version:
-        - 'v8.2.1000'
-        - 'v8.2.0000'
-        - 'v8.1.0000'
-        - 'v8.0.0000'
-        - 'v7.4'
+        os: [ubuntu-latest]
+        node-version: [10, 14]
+
+    env:
+      NODE_ENV: test
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@master
-
-    - name: Setup Ruby
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: '2.6'
-
-    - name: Setup Bundle
-      run: |
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-
-    - name: Setup Vim
-      uses: thinca/action-setup-vim@v1
-      with:
-        vim_version: ${{ matrix.vim_version }}
-
-    - name: Install Dependencies
-      run: | 
-        curl -f -L "https://raw.githubusercontent.com/vim-airline/vim-airline-themes/master/autoload/airline/themes/simple.vim" -o autoload/airline/themes/simple.vim
-        curl -f -L "https://raw.githubusercontent.com/vim-airline/vim-airline-themes/master/autoload/airline/themes/molokai.vim" -o autoload/airline/themes/molokai.vim
-        mkdir colors && curl -f -L 'https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim' -o colors/molokai.vim
-
-    - name: Run Test
-      run: rake ci
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install yarn
+        run: |
+          curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+      - uses: actions/checkout@v2
+      - name: yarn install
+        run: |
+          yarn global add typescript
+          yarn
+      - name: yarn lint
+        run: yarn lint
+      - if: matrix.os == 'macos-latest'
+        name: yarn test on macOS
+        run: |
+          curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-macos.tar.gz
+          tar xzf nvim-macos.tar.gz
+          export PATH="${PATH}:node_modules/.bin:$(pwd)/nvim-osx64/bin"
+          nvim --version
+          yarn test
+      - if: matrix.os == 'ubuntu-latest'
+        name: yarn test on Ubuntu
+        run: |
+          curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+          tar xzf nvim-linux64.tar.gz
+          export PATH="${PATH}:node_modules/.bin:$(pwd)/nvim-linux64/bin"
+          nvim --version
+          yarn test
+        env:
+          NODE_ENV: test

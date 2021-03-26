@@ -1,17 +1,11 @@
 {
-  "name": "tsuquyomi",
-  "version": "0.7.0",
-  "description": "Vim plugin for typescript",
-  "directories": {
-    "test": "vest"
-  },
-  "repository": "https://github.com/Quramy/tsuquyomi.git",
-  "devDependencies": {
-    "typescript": "~3.0.1"
-  },
-  "scripts": {
-    "test": "bash runtest.sh"
-  },
-  "author": "Quramy",
-  "license": "MIT"
+    "name": "yajs.vim",
+    "version": "1.0.0",
+    "description": "Yet another JavaScript syntax for Vim",
+    "devDependencies": {
+        "js-yaml": "*",
+        "camel-case": "*",
+        "is-upper-case": "*"
+    },
+    "license": "Same as Vim"
 }

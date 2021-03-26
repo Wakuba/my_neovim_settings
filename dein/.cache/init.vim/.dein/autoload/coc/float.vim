@@ -503,7 +503,7 @@ function! coc#float#create_prompt_win(title, default, opts) abort
   call coc#float#close_auto_hide_wins()
   " Calculate col
   let curr = win_screenpos(winnr())[1] + wincol() - 2
-  let width = coc#helper#min(max([strdisplaywidth(a:default) + 2, s:prompt_win_width]), &columns - 2)
+  let width = coc#helper#min(max([strdisplaywidth(a:title) + 2, s:prompt_win_width]), &columns - 2)
   if width == &columns - 2
     let col = 0 - curr
   else
@@ -1242,8 +1242,8 @@ function! coc#float#create_buf(bufnr, ...) abort
     if has('nvim')
       call nvim_buf_set_lines(bufnr, 0, -1, v:false, lines)
     else
-      silent call deletebufline(bufnr, 1, '$')
-      silent call setbufline(bufnr, 1, lines)
+      call deletebufline(bufnr, 1, '$')
+      call setbufline(bufnr, 1, lines)
     endif
   endif
   return bufnr

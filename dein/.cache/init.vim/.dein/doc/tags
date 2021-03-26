@@ -489,7 +489,6 @@ coc-config-codelens	coc.txt	/*coc-config-codelens*
 coc-config-cursors	coc.txt	/*coc-config-cursors*
 coc-config-diagnostic	coc.txt	/*coc-config-diagnostic*
 coc-config-dialog	coc.txt	/*coc-config-dialog*
-coc-config-hover	coc.txt	/*coc-config-hover*
 coc-config-http	coc.txt	/*coc-config-http*
 coc-config-languageserver	coc.txt	/*coc-config-languageserver*
 coc-config-list	coc.txt	/*coc-config-list*
@@ -768,7 +767,6 @@ g:dein#notification_time	dein.txt	/*g:dein#notification_time*
 g:dein#plugin	dein.txt	/*g:dein#plugin*
 g:dein#types#git#clone_depth	dein.txt	/*g:dein#types#git#clone_depth*
 g:dein#types#git#command_path	dein.txt	/*g:dein#types#git#command_path*
-g:dein#types#git#default_hub_site	dein.txt	/*g:dein#types#git#default_hub_site*
 g:dein#types#git#default_protocol	dein.txt	/*g:dein#types#git#default_protocol*
 g:dein#types#git#pull_command	dein.txt	/*g:dein#types#git#pull_command*
 g:emmet_curl_command	emmet.txt	/*g:emmet_curl_command*

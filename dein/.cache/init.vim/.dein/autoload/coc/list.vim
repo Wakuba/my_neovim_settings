@@ -18,7 +18,7 @@ function! coc#list#setlines(bufnr, lines, append)
     silent call appendbufline(a:bufnr, '$', a:lines)
   else
     if exists('*deletebufline')
-      silent call deletebufline(a:bufnr, len(a:lines) + 1, '$')
+      call deletebufline(a:bufnr, len(a:lines) + 1, '$')
     else
       let n = len(a:lines) + 1
       let saved_reg = @"
